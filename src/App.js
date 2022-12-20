@@ -1,10 +1,33 @@
 import { useState } from "react";
 import "./App.css";
+import db from "./firebase";
 
 function App() {
   const [bookTitle, setBookTitle] = useState("");
   const [bookPage, setBookPage] = useState("");
   const [bookPublish, setBookPublish] = useState("");
+
+  const handleBook = async (e) => {
+    e.preventDefault();
+    //firestore(데이터베이스)에 보내기(비동기설정 await)
+    await db
+      .collection("books")
+      .add({
+        title: bookTitle,
+        page: parseInt(bookPage),
+        publish: new Date(bookPublish),
+        //에러메시지 추가
+      })
+      .then((docRef) => {
+        console.log(docRef);
+      })
+      .catch((e) => alert(e.message));
+
+    // db들어가고 나서 초기화
+    setBookTitle("");
+    setBookPage("");
+    setBookPublish("");
+  };
 
   return (
     <div className='App'>
@@ -29,7 +52,7 @@ function App() {
             name='pages'
             id='book-pages'
             value={bookPage}
-            placeholder='제목'
+            placeholder='페이지수'
             onChange={(e) => setBookPage(e.target.value)}
           />
         </div>
@@ -41,10 +64,13 @@ function App() {
             name='publish-date'
             id='book-publish-date'
             value={bookPublish}
-            placeholder='제목'
+            placeholder='출판일'
             onChange={(e) => setBookPublish(e.target.value)}
           />
         </div>
+        <button type='submit' onClick={handleBook}>
+          저장하기
+        </button>
       </form>
     </div>
   );
