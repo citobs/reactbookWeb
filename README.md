@@ -14,3 +14,7 @@
 12/20 23:47 firestore(db)연동 완료 및 데이터추가 성공!
 
 12/21 12:09 DB인풋성공 /app.js에서 try catch문 주입성공!
+
+12/21 12:19 db가져오기성공! app.js에서 확인!
+
+12/21 01:02 npm i --save styled-components 설치

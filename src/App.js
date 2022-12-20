@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import BookList from "./components/BookList";
+
 import db from "./firebase";
 
 function App() {
@@ -9,22 +11,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  //DB데이터 가져오기
-  const [books, setBooks] = useState(null);
-  //찰칵찍어서(onSnapshot) mapping을 새로 해줄거야!
-  useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) =>
-      setBooks(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      )
-    );
-  }, []);
-
   //book데이터 확인
-  console.log(books);
+  // console.log(books);
 
   const handleBook = async (e) => {
     e.preventDefault();
@@ -98,7 +86,9 @@ function App() {
           {loading ? "저장중입니다..." : "저장하기"}
         </button>
       </form>
+
       {error && <p className='error'>{error}</p>}
+      <BookList />
     </div>
   );
 }
