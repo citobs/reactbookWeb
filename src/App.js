@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import db from "./firebase";
 
@@ -8,6 +8,23 @@ function App() {
   const [bookPublish, setBookPublish] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  //DB데이터 가져오기
+  const [books, setBooks] = useState(null);
+  //찰칵찍어서(onSnapshot) mapping을 새로 해줄거야!
+  useEffect(() => {
+    db.collection("books").onSnapshot((snapshot) =>
+      setBooks(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      )
+    );
+  }, []);
+
+  //book데이터 확인
+  console.log(books);
 
   const handleBook = async (e) => {
     e.preventDefault();
