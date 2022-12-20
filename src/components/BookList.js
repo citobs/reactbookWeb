@@ -9,7 +9,7 @@ function BookList() {
 
   useEffect(() => {
     db.collection("books")
-      .orderBy("publishDate", "desc")
+      // .orderBy("publishDate", "desc")
       .onSnapshot((snapshot) =>
         setBooks(
           snapshot.docs.map((doc) => ({

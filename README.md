@@ -20,3 +20,5 @@
 12/21 01:02 npm i --save styled-components 설치
 
 12:21 02:31 일부오류수정(우연히..이유모름)
+
+12:21 날짜오류 해결(pulishDate가 아닌 publish)
