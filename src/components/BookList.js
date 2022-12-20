@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import db from "../firebase";
+import { useState } from "react";
+import { useEffect } from "react";
 import BookItem from "./BookItem";
 
 function BookList() {
-  const [books, setBooks] = useState(null);
+  const [books, setBooks] = useState([]);
 
-  //DB데이터 가져오기
-
-  //찰칵찍어서(onSnapshot) mapping을 새로 해줄거야!
   useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) =>
-      setBooks(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      )
-    );
+    db.collection("books")
+      .orderBy("publishDate", "desc")
+      .onSnapshot((snapshot) =>
+        setBooks(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        )
+      );
   }, []);
-  return (
-    <div className='bookList'>
-      <h2>book list</h2>
 
-      {/* 매핑 */}
-      {books.map((book) => (
-        <BookItem book={book} />
-      ))}
+  return (
+    <div className='booklist'>
+      <h2>Book list</h2>
+      {!books.length
+        ? "북 리스트가 존재하지 않습니다"
+        : books.map((book) => <BookItem book={book} key={book.id} />)}
     </div>
   );
 }

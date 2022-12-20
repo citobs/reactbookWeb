@@ -3,6 +3,7 @@ import "./App.css";
 import BookList from "./components/BookList";
 
 import db from "./firebase";
+import { Button } from "./ui";
 
 function App() {
   const [bookTitle, setBookTitle] = useState("");
@@ -10,6 +11,7 @@ function App() {
   const [bookPublish, setBookPublish] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  // const [books, setBooks] = useState(null);
 
   //book데이터 확인
   // console.log(books);
@@ -85,9 +87,11 @@ function App() {
         <button type='submit' onClick={handleBook} disabled={loading}>
           {loading ? "저장중입니다..." : "저장하기"}
         </button>
+        {/* <Button type='submit' onClick={handleBook} disabled={loading}>
+          {loading ? "저장중입니다..." : "저장하기"}
+        </Button> */}
       </form>
 
-      {error && <p className='error'>{error}</p>}
       <BookList />
     </div>
   );
