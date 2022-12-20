@@ -6,27 +6,34 @@ function App() {
   const [bookTitle, setBookTitle] = useState("");
   const [bookPage, setBookPage] = useState("");
   const [bookPublish, setBookPublish] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleBook = async (e) => {
     e.preventDefault();
+    setLoading(true);
     //firestore(데이터베이스)에 보내기(비동기설정 await)
-    await db
-      .collection("books")
-      .add({
-        title: bookTitle,
-        page: parseInt(bookPage),
-        publish: new Date(bookPublish),
-        //에러메시지 추가
-      })
-      .then((docRef) => {
-        console.log(docRef);
-      })
-      .catch((e) => alert(e.message));
+    try {
+      await db
+        .collection("books")
+        .add({
+          title: bookTitle,
+          page: parseInt(bookPage),
+          publish: new Date(bookPublish),
+          //에러메시지 추가
+        })
+        .then((docRef) => {
+          console.log(docRef);
+        });
+    } catch (e) {
+      setError("에러가 발생했습니다.");
+    }
 
     // db들어가고 나서 초기화
     setBookTitle("");
     setBookPage("");
     setBookPublish("");
+    setLoading(false);
   };
 
   return (
@@ -68,10 +75,13 @@ function App() {
             onChange={(e) => setBookPublish(e.target.value)}
           />
         </div>
-        <button type='submit' onClick={handleBook}>
-          저장하기
+
+        {/* 삼항조건문추가 */}
+        <button type='submit' onClick={handleBook} disabled={loading}>
+          {loading ? "저장중입니다..." : "저장하기"}
         </button>
       </form>
+      {error && <p className='error'>{error}</p>}
     </div>
   );
 }
