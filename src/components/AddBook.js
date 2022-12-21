@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Field, Message, Modal } from "../ui";
 import db from "../firebase";
 
-function AddBook() {
+function AddBook({ setToasts }) {
   const [bookTitle, setBookTitle] = useState("");
   const [bookPage, setBookPage] = useState("");
   const [bookPublish, setBookPublish] = useState("");
@@ -31,6 +31,7 @@ function AddBook() {
         .then((docRef) => {
           console.log(docRef);
         });
+      setToasts(["성공했습니다 by CIT"]);
     } catch (e) {
       setError("에러가 발생했습니다.");
     }
@@ -45,7 +46,6 @@ function AddBook() {
   return (
     <>
       <Button onClick={() => (setIsModal(true), setError(null))}>
-        {" "}
         CIT 뉴북 추가하기!
       </Button>
 
