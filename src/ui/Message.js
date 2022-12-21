@@ -22,8 +22,8 @@ const Pstyled = styled.p`
   }}
 `;
 
-function Message({ error, type }) {
-  return <>{error && <Pstyled type={type}> {error}</Pstyled>}</>;
+function Message({ text, type }) {
+  return <>{text && <Pstyled type={type}> {text}</Pstyled>}</>;
 }
 
 export default Message;
