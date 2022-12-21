@@ -3,14 +3,18 @@ import { useState } from "react";
 import { Button, Field, Message, Modal } from "../ui";
 import db from "../firebase";
 import { ToasterContext } from "../ui/ToasterContext";
+import { useNavigate } from "react-router-dom";
 
-function AddBook({ setToasts }) {
+function AddBook() {
   const [bookTitle, setBookTitle] = useState("");
   const [bookPage, setBookPage] = useState("");
   const [bookPublish, setBookPublish] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isModal, setIsModal] = useState(false);
+
+  const history = useNavigate();
+
   // const [books, setBooks] = useState(null);
 
   //book데이터 확인
@@ -21,23 +25,20 @@ function AddBook({ setToasts }) {
     setLoading(true);
     //firestore(데이터베이스)에 보내기(비동기설정 await)
     try {
-      await db
-        .collection("books")
-        .add({
-          title: bookTitle,
-          page: parseInt(bookPage),
-          publish: new Date(bookPublish),
-          //에러메시지 추가
-        })
-        .then((docRef) => {
-          console.log(docRef);
-        });
+      const docRef = await db.collection("books").add({
+        title: bookTitle,
+        page: parseInt(bookPage),
+        publish: new Date(bookPublish),
+        //에러메시지 추가
+      });
 
       addToast({ text: "성공적으로 추가되었습니다.", type: "success" });
-      setIsModal(false);
+      // setIsModal(false);
+      history(`/book/${docRef.id}`);
 
       //   setToasts(["성공했습니다 by CIT"]);
     } catch (e) {
+      addToast({ text: "추가에 실패했습니다..", type: "error" });
       setError("에러가 발생했습니다.");
       setTimeout(() => {
         setError(null);
@@ -45,9 +46,9 @@ function AddBook({ setToasts }) {
     }
 
     // db들어가고 나서 초기화
-    setBookTitle("");
-    setBookPage("");
-    setBookPublish("");
+    // setBookTitle("");
+    // setBookPage("");
+    // setBookPublish("");
     setLoading(false);
   };
 

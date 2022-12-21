@@ -1,9 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import EditBook from "../EditBook";
 
-function BookGeneral({ book }) {
+function BookGeneral({ book, id }) {
   return (
-    <div className='bookGeneral'>
-      <h4>{book && book.title}</h4>
+    <div className='BookGeneral'>
+      <h1> 일반 정보</h1>
+      <p> 책 : {book.title}</p>
+      <hr />
+      <EditBook book={book} id={id} />
     </div>
   );
 }

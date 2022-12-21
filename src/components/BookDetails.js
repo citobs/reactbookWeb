@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Route, useParams, Routes, Link, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  useParams,
+  Routes,
+  Link,
+  Outlet,
+} from "react-router-dom";
 import db from "../firebase";
 import BookAuthors from "./book-details/BookAuthrs";
 import BookGeneral from "./book-details/BookGenral";
+import BookMenu from "./book-details/BookMenu";
 import BookPhotos from "./book-details/BookPhotos";
 
 function BookDetails() {
@@ -38,30 +46,21 @@ function BookDetails() {
     } catch (e) {
       console.error(e);
     }
-  }, []);
+  }, [id]);
 
   console.log(book);
 
   return (
     <div className='bookDetails'>
-      <ul>
-        <li>
-          <Link to=''>일반정보</Link>
-          <Outlet />
-        </li>
-        <li>
-          <Link to='/book/authors'>작가정보</Link>
-        </li>
-        <li>
-          <Link to='/book/photos'>작가사진</Link>
-        </li>
-      </ul>
+      <BookMenu />
+      <Outlet />
 
       {book ? (
         <Routes>
-          <Route path='' exact element={<BookGeneral book={book} />} />
-          <Route path='authors' element={<BookAuthors book={book} />} />
-          <Route path='photos' element={<BookPhotos book={book} />} />
+          <Route path='/' exact element={<BookGeneral book={book} id={id} />}>
+            <Route path='authors' element={<BookAuthors book={book} />} />
+            <Route path='photos' element={<BookPhotos book={book} />} />
+          </Route>
         </Routes>
       ) : (
         "저장된 내역이 존재하지 않습니다 "
