@@ -23,9 +23,13 @@ function BookList() {
   return (
     <div className='booklist'>
       <h2>Book list</h2>
-      {!books.length
+      {/* {!books.length
         ? "북 리스트가 존재하지 않습니다"
-        : books.map((book) => <BookItem book={book} key={book.id} />)}
+        : books.map((book) => <BookItem book={book} key={book.id} />)} */}
+
+      {books.map((book) => (
+        <BookItem book={book} />
+      ))}
     </div>
   );
 }

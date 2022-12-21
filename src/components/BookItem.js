@@ -13,10 +13,13 @@ function BookItem({ book }) {
         {book.page}
       </span>
       <br />
+
       <span>
         <strong> 출판일 : {""}</strong>
         {new Date(book.publish.toDate()).toLocaleString()}
       </span>
+      <br />
+      <br />
     </div>
   );
 }
