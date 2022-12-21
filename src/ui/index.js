@@ -1,3 +1,4 @@
 import Button from "./Button";
+import Message from "./Message";
 
-export { Button };
+export { Button, Message };

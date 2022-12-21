@@ -3,7 +3,7 @@ import "./App.css";
 import BookList from "./components/BookList";
 
 import db from "./firebase";
-import { Button } from "./ui";
+import { Button, Message } from "./ui";
 
 function App() {
   const [bookTitle, setBookTitle] = useState("");
@@ -58,7 +58,6 @@ function App() {
             onChange={(e) => setBookTitle(e.target.value)}
           />
         </div>
-
         <div>
           <label htmlFor='book-pages'>페이지수</label>
           <input
@@ -70,7 +69,6 @@ function App() {
             onChange={(e) => setBookPage(e.target.value)}
           />
         </div>
-
         <div>
           <label htmlFor='book-publish-date'>출판일</label>
           <input
@@ -82,7 +80,6 @@ function App() {
             onChange={(e) => setBookPublish(e.target.value)}
           />
         </div>
-
         {/* 삼항조건문추가 */}
         {/* <button type='submit' onClick={handleBook} disabled={loading}>
           {loading ? "저장중입니다..." : "저장하기"}
@@ -90,6 +87,7 @@ function App() {
         <Button type='submit' onClick={handleBook} disabled={loading}>
           {loading ? "저장중입니다..." : "저장하기"}
         </Button>
+        <Message error={error} type='error' />
       </form>
 
       <BookList />
