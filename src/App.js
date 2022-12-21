@@ -3,7 +3,7 @@ import "./App.css";
 import BookList from "./components/BookList";
 
 import db from "./firebase";
-import { Button, Message } from "./ui";
+import { Button, Field, Message } from "./ui";
 
 function App() {
   const [bookTitle, setBookTitle] = useState("");
@@ -47,8 +47,8 @@ function App() {
     <div className='App'>
       <h1>앱매인임</h1>
       <form>
-        <div>
-          <label htmlFor='book-title'>제목</label>
+        <Field labelText='CIT도서제목' id='book-title'>
+          {/* <label htmlFor='book-title'>제목</label> */}
           <input
             type='text'
             name='name'
@@ -57,9 +57,9 @@ function App() {
             placeholder='제목'
             onChange={(e) => setBookTitle(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor='book-pages'>페이지수</label>
+        </Field>
+        <Field labelText='페이지수' id='book-pages'>
+          {/* <label htmlFor='book-pages'>페이지수</label> */}
           <input
             type='number'
             name='pages'
@@ -68,9 +68,9 @@ function App() {
             placeholder='페이지수'
             onChange={(e) => setBookPage(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor='book-publish-date'>출판일</label>
+        </Field>
+        <Field labelText='출판일' id='book-publish-date'>
+          {/* <label htmlFor='book-publish-date'>출판일</label> */}
           <input
             type='date'
             name='publish-date'
@@ -79,7 +79,7 @@ function App() {
             placeholder='출판일'
             onChange={(e) => setBookPublish(e.target.value)}
           />
-        </div>
+        </Field>
         {/* 삼항조건문추가 */}
         {/* <button type='submit' onClick={handleBook} disabled={loading}>
           {loading ? "저장중입니다..." : "저장하기"}
