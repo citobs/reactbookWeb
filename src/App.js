@@ -1,24 +1,28 @@
-import { useState } from "react";
+import React from "react";
 import "./App.css";
 import BookList from "./components/BookList";
-// import db from "./firebase";
-// import { Button, Field, Message, Modal } from "./ui";
 import "./styles.css";
-import AddBook from "./components/AddBook";
-import Toaster from "./ui/Toaster";
-import { ToasterContext, ToasterProvider } from "./ui/ToasterContext";
+import { ToasterProvider } from "./ui/ToasterContext";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import BookDetails from "./components/BookDetails";
 
 function App() {
   // const [toasts, setToasts] = useState([]);
 
   return (
-    <ToasterProvider>
-      <div className='App'>
-        <h1>CIT도서대출 프로그래밍!!!(리액트 겁나어렵)</h1>
-
-        <BookList />
-      </div>
-    </ToasterProvider>
+    <Router>
+      <ToasterProvider>
+        <div className='App'>
+          <h1>
+            <Link to='/'>CIT도서대출 프로그래밍!!!(리액트 겁나어렵)</Link>
+          </h1>
+          <Routes>
+            <Route path='/' element={<BookList />} />
+            <Route path='/book/:id' element={<BookDetails />} />
+          </Routes>
+        </div>
+      </ToasterProvider>
+    </Router>
   );
 }
 
