@@ -48,7 +48,10 @@ function App() {
     <div className='App'>
       <h1>CIT도서대출 프로그래밍!!!(리액트 겁나어렵)</h1>
 
-      <Button onClick={() => setIsModal(true)}> CIT 뉴북 추가하기!</Button>
+      <Button onClick={() => (setIsModal(true), setError(null))}>
+        {" "}
+        CIT 뉴북 추가하기!
+      </Button>
 
       <Modal
         title='cit 뉴북 책추가'
