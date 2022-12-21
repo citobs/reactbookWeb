@@ -15,7 +15,6 @@ function App() {
     <ToasterProvider>
       <div className='App'>
         <h1>CIT도서대출 프로그래밍!!!(리액트 겁나어렵)</h1>
-        <AddBook />
 
         <BookList />
       </div>

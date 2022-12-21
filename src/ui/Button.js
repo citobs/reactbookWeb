@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { ToasterContext } from "./ToasterContext";
+import styled, { css } from "styled-components";
 
 const ButtonStyled = styled.button`
   display: inline-block;
@@ -11,6 +10,19 @@ const ButtonStyled = styled.button`
   color: white;
   background-color: black;
   cursor: pointer;
+
+  ${(props) => {
+    return (
+      props.outline &&
+      css`
+        border: 2px solid gray;
+        background-color: white;
+        border-radius: 6px;
+        color: black;
+        font-size: 20px;
+      `
+    );
+  }}
 `;
 
 function Button({ loading, ...rest }) {

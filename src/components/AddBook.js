@@ -55,9 +55,9 @@ function AddBook({ setToasts }) {
     <ToasterContext.Consumer>
       {({ addToast }) => (
         <>
-          <button onClick={() => (setIsModal(true), setError(null))}>
+          <Button outline onClick={() => (setIsModal(true), setError(null))}>
             CIT 뉴북 추가하기!
-          </button>
+          </Button>
 
           <Modal
             title='cit 뉴북 책추가'
