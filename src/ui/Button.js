@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ToasterContext } from "./ToasterContext";
 
 const ButtonStyled = styled.button`
   display: inline-block;
@@ -15,7 +16,7 @@ const ButtonStyled = styled.button`
 function Button({ loading, ...rest }) {
   return (
     <ButtonStyled {...rest} disabled={loading}>
-      {loading ? "저장중입니다" : rest.children}{" "}
+      {loading ? "저장중입니다" : rest.children}
     </ButtonStyled>
   );
 }

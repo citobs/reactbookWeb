@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
+// 조건에 따라 css따로 줄수있음
+
 const Wrapper = styled.div`
   position: fixed;
   right: 20px;
@@ -14,13 +16,31 @@ const Toast = styled.div`
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
   padding: 15px;
   margint-top: 15px;
+
+  ${(props) =>
+    props.type === `success` &&
+    css`
+      background-color: ForestGreen;
+      border: none;
+      color: white;
+    `};
+
+  ${(props) =>
+    props.type === `error` &&
+    css`
+      background-color: Tomato;
+      border: none;
+      color: white;
+    `};
 `;
 
 function Toaster({ toasts }) {
   return (
     <Wrapper>
       {toasts.map((toast) => (
-        <Toast className='toast'>{toast}</Toast>
+        <Toast className='toast' type={toast.type}>
+          {toast.text}
+        </Toast>
       ))}
     </Wrapper>
   );

@@ -6,20 +6,20 @@ import BookList from "./components/BookList";
 import "./styles.css";
 import AddBook from "./components/AddBook";
 import Toaster from "./ui/Toaster";
+import { ToasterContext, ToasterProvider } from "./ui/ToasterContext";
 
 function App() {
-  const [toasts, setToast] = useState([]);
+  // const [toasts, setToasts] = useState([]);
 
   return (
-    <div className='App'>
-      <h1>CIT도서대출 프로그래밍!!!(리액트 겁나어렵)</h1>
+    <ToasterProvider>
+      <div className='App'>
+        <h1>CIT도서대출 프로그래밍!!!(리액트 겁나어렵)</h1>
+        <AddBook />
 
-      <AddBook setToasts={setToast} />
-
-      <BookList />
-
-      <Toaster toasts={toasts} />
-    </div>
+        <BookList />
+      </div>
+    </ToasterProvider>
   );
 }
 
