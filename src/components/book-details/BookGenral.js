@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import EditBook from "../EditBook";
 
 function BookGeneral({ book, id }) {
